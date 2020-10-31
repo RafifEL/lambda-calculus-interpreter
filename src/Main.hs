@@ -38,7 +38,7 @@ debruijnIndex expr = case parseExpr expr of
 
 churchtoIntApprox :: String -> String
 churchtoIntApprox s
-  | s == "Parse Error! ¯\\_(ツ)_/¯" = ""
+  | isInfixOf "Parse Error!" s = ""
   | otherwise = 
     let filt_lambda = filter (\x -> x == (s !! 1)) s
         count_num = show ((length filt_lambda) - 1)
