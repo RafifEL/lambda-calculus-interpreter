@@ -59,7 +59,7 @@ executable lambda-calculus
   -- Other library packages from which modules are imported.
   build-depends:       base >=4.9, mtl, pretty, parsec, haskeline, ansi-wl-pprint, split
   
-  other-modules:  Evaluator Parser Pretty Syntax Trace
+  other-modules:  Evaluator Parser Pretty Syntax Trace Numeral
 
   -- Directories containing source files.
   hs-source-dirs:      src
