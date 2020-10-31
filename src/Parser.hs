@@ -3,15 +3,16 @@ module Parser (parseExpr) where
 import Syntax
 import Text.ParserCombinators.Parsec
 
+import Numeral
 
 type LambdaParser = GenParser Char () LExpr
 
-toChurchNumeral :: Int -> [Char]
-toChurchNumeral n = "(\\sz." ++ toChurchNumeralHelper n ++ ")"
+-- toChurchNumeral :: Int -> [Char]
+-- toChurchNumeral n = "(\\sz." ++ toChurchNumeralHelper n ++ ")"
 
-toChurchNumeralHelper :: Int -> String
-toChurchNumeralHelper 0 = "z"
-toChurchNumeralHelper n = "s(" ++ toChurchNumeralHelper (n-1) ++ ")"
+-- toChurchNumeralHelper :: Int -> String
+-- toChurchNumeralHelper 0 = "z"
+-- toChurchNumeralHelper n = "s(" ++ toChurchNumeralHelper (n-1) ++ ")"
 
 varName :: GenParser Char () Name
 varName = letter
@@ -48,6 +49,6 @@ lambdaExpr  = do
 parseExpr :: String -> Either ParseError LExpr
 parseExpr s = 
     if s !! 0 `elem` ['0'..'9']
-        then let number = read s :: Int 
-             in parse lambdaExpr "" (toChurchNumeral number)
+        then let operation = toChurchNumeral s
+             in parse lambdaExpr "" operation
     else parse lambdaExpr "" s
