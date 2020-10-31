@@ -40,4 +40,4 @@ lambdaExpr  = do
                   return $ foldl1 App terms
 
 parseExpr :: String -> Either ParseError LExpr
-parseExpr = parse lambdaExpr ""
+parseExpr s = parse lambdaExpr "" s
