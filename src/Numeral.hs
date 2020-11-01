@@ -19,9 +19,6 @@ helperToChurchNumeral s acc
             newAcc = acc ++ number
         in helperToChurchNumeral (tail s) newAcc
 
-toInt :: [Char] -> Int
-toInt s = read s :: Int
-
 intToChurchNumeral :: Int -> [Char]
 intToChurchNumeral n = "(\\sz." ++ intToChurchNumeralHelper n ++ ")"
 
