@@ -23,17 +23,6 @@ newToChurchNumeral s acc
             newAcc = acc ++ number
         in newToChurchNumeral (tail s) newAcc
 
-
-sumToChurchNumeral :: [Char] -> [Char]
-sumToChurchNumeral s = 
-    let data_split = map toInt $ splitOn "+" s
-    in intToChurchNumeral (data_split !! 0) ++ "(\\wyx.y(wyx))" ++ intToChurchNumeral (data_split !! 1)
-
-multToChurchNumeral :: [Char] -> [Char]
-multToChurchNumeral s = 
-    let data_split = map toInt $ splitOn "*" s
-    in "(\\xyz.x(yz))" ++ intToChurchNumeral (data_split !! 0) ++ intToChurchNumeral (data_split !! 1)
-
 toInt :: [Char] -> Int
 toInt s = read s :: Int
 
