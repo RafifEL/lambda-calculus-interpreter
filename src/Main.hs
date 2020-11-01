@@ -40,7 +40,7 @@ churchtoIntApprox :: String -> String
 churchtoIntApprox s
   | isInfixOf "Parse Error!" s = ""
   | otherwise = 
-    let filt_lambda = filter (\x -> x == (s !! 1)) s
+    let filt_lambda = filter (\x -> x == (head $ tail s)) s
         count_num = show ((length filt_lambda) - 1)
     in "Numeral Approx = " ++ count_num ++ "\n"
 
