@@ -1,27 +1,23 @@
 module Numeral where
 
-import Data.List.Split ( splitOn )
 import Data.Char(digitToInt)
 
 toChurchNumeral :: [Char] -> [Char]
-toChurchNumeral s 
-    | '*' `elem` s = multToChurchNumeral s    
-    | '+' `elem` s = sumToChurchNumeral s
-    | otherwise = intToChurchNumeral (toInt s)
+toChurchNumeral = (flip helperToChurchNumeral) ""
 
-newToChurchNumeral :: [Char] -> [Char] -> [Char]
-newToChurchNumeral s acc
+helperToChurchNumeral :: [Char] -> [Char] -> [Char]
+helperToChurchNumeral s acc
     | s == "" = acc
     | head s == '+' =
         let newAcc = acc ++ "(\\wyx.y(wyx))"
-        in newToChurchNumeral (tail s) newAcc
+        in helperToChurchNumeral (tail s) newAcc
     | head s == '*' =
         let newAcc = "(\\xyz.x(yz))(" ++ acc ++ ")"
-        in newToChurchNumeral (tail s) newAcc
+        in helperToChurchNumeral (tail s) newAcc
     | otherwise =
         let number = intToChurchNumeral (digitToInt (head s))
             newAcc = acc ++ number
-        in newToChurchNumeral (tail s) newAcc
+        in helperToChurchNumeral (tail s) newAcc
 
 toInt :: [Char] -> Int
 toInt s = read s :: Int

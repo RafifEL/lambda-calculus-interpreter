@@ -49,6 +49,6 @@ lambdaExpr  = do
 parseExpr :: String -> Either ParseError LExpr
 parseExpr s = 
     if head s `elem` ['0'..'9']
-        then let operation = newToChurchNumeral s ""
+        then let operation = toChurchNumeral s
              in parse lambdaExpr "" operation
     else parse lambdaExpr "" s
